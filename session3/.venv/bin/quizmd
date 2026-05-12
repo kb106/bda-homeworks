@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' "/Users/kbyrne/Documents/MSc Study/big data analytics/Session1/bda/session3/.venv/bin/python3.12" "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from quizmd import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
