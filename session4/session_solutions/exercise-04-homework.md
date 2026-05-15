@@ -6,22 +6,50 @@ Link: https://www.youtube.com/watch?v=XKu_SEDAykw
 
 ## My understanding of the problem
 
-Write the problem in your own words.
+## Requirements: There are a sequence of random numbers a pair should add up to a given sum (i.e. 8)
+## If a pair adds up or does not add up note this
+## Rules: you can store the numbers in an array, or sort them in any order
+## Cannot re-use the same index, all numbers are int data types
+## - or + integers
+## take a pair and compare to all previous numbers before it, use a hash table
 
 ## My thought process
 
-Explain how you approached the problem.
+## 1. Binary Search Tree: At first I thought to iterate through and compare all combinations of numbers by finding the start, end, of the sequence of numbers
+## but as mentioned in the video this is sequential and might miss potential pairs
+## 2. Hash table: Then it could be possible to use a hash table to look up each number in the sequence and find out what number is required to sum up to the target num
+## So in this way a hash table can be built one sequence number at a time, until we find a matching pair
+## 3. But instead we could leave the sequence unsorted, start with a pair fand group largest numbers and smallest
+## Then use the pair to find all the numbers previous to the current number (store in memory) to find pairs that sum up
 
 ## My Python solution
 
 ```python
-# Paste your Python code here
+
+def download_and_rotate(arr, target):
+    setofnums = set()
+    n         = len(arr)
+
+    #
+    for i in arr:
+        complement = target - i
+        if complement in setofnums:
+            return(complement, i)
+        setofnums.add(i)
+    return None
+
+# function call
+nums       = [1,2,4,4,5,6,7,8]
+target_sum = 11
+print(download_and_rotate(nums, target_sum))
+
 ```
 
 ## Complexity
+## This depends on the approach taken at first with a nested array the time complexity was 0(n) and space 0(log n) - if also using a sorted array
 
-- Time complexity:
-- Space complexity:
+- Time complexity: 0(n)
+- Space complexity: 0(1)
 
 ## Comparison with the video solution
 
@@ -29,6 +57,17 @@ What was similar?
 What was different?
 What did you learn?
 
+## Initially I had the idea from the nested loops hint in the video to use a brute force method to iterate over all sequences with a nested loop
+## but this was too performance heavy and eventually ended by updating the solution to also use a BST method
+## which then led to an infinite loop (dangerous)
+## I needed help to think through the problem, as I was not thinking in terms of efficiency and best time/space complexity outcome
+## It taught me to prioritise solutions with the best time/space complexity, and to think out loud and iterate a solution by refactoring
+
+
 ## Interview reflection
 
 What would you do better next time when explaining your thinking?
+
+## I would approach the problem with time/space objectives as a priority, and learn the different methods that python uses to
+## apply to a specific situation (i.e. to solve the actual problem in the most immediate efficient way).
+## Unfortunately I did not have the requisite knowledge to think the solution through on my own, so I recognised this gap in my thinking...I am learning
