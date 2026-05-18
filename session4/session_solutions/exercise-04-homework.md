@@ -27,22 +27,42 @@ take a pair and compare to all previous numbers before it, use a hash table
 
 ```python
 
-def download_and_rotate(arr, target):
+def loc_summed_pairs(arr, target):
     setofnums = set()
     n         = len(arr)
 
-    #
-    for i in arr:
-        complement = target - i
-        if complement in setofnums:
-            return(complement, i)
-        setofnums.add(i)
-    return None
+    #initialise vars for left and right of arrand var for setofnumbers to process, finally var to hold append to results arr
+    setofnums = set()
+    left      = 0
+    right     = len(arr) -1
+
+    # compare left of arr to right to order nums low to high
+    while left < right:
+        total = arr[left] + arr[right]
+
+        if total == target:
+            #Use pointer search
+            left += 1
+            right -= 1
+            return arr[left], arr[right]
+
+        elif total < target:
+            left += 1
+
+        else:
+            #Use hash table
+            for i in arr:
+                complement = target - i
+                if complement in setofnums:
+                   yield complement, i
+                setofnums.add(i)
+            return
 
 # function call
-nums       = [1,2,4,4,5,6,7,8]
+nums = [1,2,4,4,5,6,7,8]
 target_sum = 11
-print(download_and_rotate(nums, target_sum))
+
+print(list(loc_summed_pairs(nums, target_sum)))
 
 ```
 
